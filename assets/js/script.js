@@ -211,7 +211,12 @@ $(".card .list-group").sortable({
   out: function(event) {
     console.log("out", event.target);
   },
+
+
+
+
   update: function(event) {
+    var tempArr = [];
     // loop over current set of children in sortable list
     $(this).children().each(function() {
       var text = $(this)
@@ -224,8 +229,39 @@ $(".card .list-group").sortable({
       .text()
       .trim();
 
-      console.log(text,date);
+      // add task to the temp array as an object
+      tempArr.push({
+        text: text,
+        date: date
+      });
     });
+    console.log(tempArr);
+
+    //trim down lists ID to match object properrty
+    var arrName =$(this)
+    .attr("id")
+    .replace("list-", "");
+
+    //update array  
+    tasks[arrName] = tempArr;
+    saveTasks();
   }
-  
+});
+
+$("#trash").droppable({
+  accept: ".card .list-group-item",
+  tolerance: "touch",
+  drop: function(event, ui) {
+    ui.draggable.remove();
+    console.log("drop");
+  },
+  over: function(event, ui) {
+    console.log("over");
+  },
+  out: function(event, ui){
+    console.log("out");
+
+    
+  }
+});
 
