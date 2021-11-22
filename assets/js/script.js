@@ -318,7 +318,7 @@ $("#trash").droppable({
 });
 
 
-// $("#modalDueDate").datepicker({ just commented out
+// $("#modalDueDate").datepicker({ just commented ou
 //   minDate: 1
 // });
 
